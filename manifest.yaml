@@ -63,7 +63,7 @@ main:
   # Specifies where to mount the data volume(s), if there are any. Mounts for pointer dependency volumes are also denoted here. These are necessary if data needs to be read from / written to these volumes. 
   mounts:
     # Specifies where on the service's file system its persistence directory should be mounted prior to service startup
-    main: /root
+    main: /
 # This is where health checks would be defined - see a more advanced example in https://github.com/Start9Labs/start-pages-wrapper
 health-checks: {}
 config: ~
