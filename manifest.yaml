@@ -23,10 +23,10 @@ build: ["make"]
 # Human readable descriptors for the service. These are used throughout the StartOS user interface, primarily in the marketplace.
 description:
   # This is the first description visible to the user in the marketplace.
-  short: Example service
+  short: Fedimint guardian server
   # This description will display with additional details in the service's individual marketplace page
   long: |
-    Hello World is a bare-bones service that launches a web interface to say "Hello World", and nothing more.
+    A modular open source protocol to custody and transact bitcoin in a community context, built on a strong foundation of privacy.
 # These assets are static files necessary for packaging the service for Start9 (into an s9pk). Each value is a path to the specified asset. If an asset is missing from this list, or otherwise denoted, it will be defaulted to the values denoted below. 
 assets:
   # Default = LICENSE.md
