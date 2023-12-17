@@ -13,7 +13,7 @@ license: mit
 # The Start9 wrapper repository URL for the package. This repo contains the manifest file (this), any scripts necessary for configuration, backups, actions, or health checks (more below). This key must exist. But could be embedded into the source repository. 
 wrapper-repo: "https://github.com/EthnTuttle/fedimintd-startos"
 # The original project repository URL. There is no upstream repo in this example
-upstream-repo: "https://github.com/Start9Labs/hello-world"
+upstream-repo: "hhttps://github.com/fedimint/fedimint"
 # URL to the support site / channel for the project. This key can be omitted if none exists, or it can link to the original project repository issues.
 support-site: "https://docs.start9.com/"
 # URL to the marketing site for the project. This key can be omitted if none exists, or it can link to the original project repository. 
