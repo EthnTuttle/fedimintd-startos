@@ -97,6 +97,26 @@ interfaces:
     protocols:
       - tcp
       - http
+  api:
+    # A human readable name for display in the UI
+    name: API Interface
+    # A descriptive description of what the interface does
+    description: The interface clients and setup UI will connect to.
+    tor-config:
+    # Port mappings are from the external port to the internal container port
+      port-mapping:
+        80: "8174"
+    # Port mappings are from the external port to the internal container port
+    lan-config:
+      443:
+        ssl: true
+        internal: 8174
+    # Denotes if the service has a user interface to display
+    ui: false
+    # Denotes the protocol specifications used by this interface
+    protocols:
+      - tcp
+      - http
 dependencies: {}
 # Specifies how backups should be run for this service. The default StartOS provided option is to use the duplicity backup library on a system image (compat)
 backup:
