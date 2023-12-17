@@ -79,20 +79,20 @@ interfaces:
   # This key is the internal name that the OS will use to configure the interface
   main:
     # A human readable name for display in the UI
-    name: User Interface
+    name: Peer-2-Peer Interface
     # A descriptive description of what the interface does
-    description: A simple user interface that is expected to display the text "Hello Word"
+    description: The interface your Peer Guardians will connect to.
     tor-config:
     # Port mappings are from the external port to the internal container port
       port-mapping:
-        80: "80"
+        80: "8173"
     # Port mappings are from the external port to the internal container port
     lan-config:
       443:
         ssl: true
-        internal: 80
+        internal: 8173
     # Denotes if the service has a user interface to display
-    ui: true
+    ui: false
     # Denotes the protocol specifications used by this interface
     protocols:
       - tcp
