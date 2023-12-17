@@ -3,7 +3,7 @@
 # The package identifier used by the OS. This must be unique amongst all other known packages
 id: fedimintd 
  # A human readable service title
-title: "Hello World"
+title: "Fedimint"
 # Service version - accepts up to four digits, where the last confirms to revisions necessary for StartOS - see documentation: https://github.com/Start9Labs/emver-rs. This value will change with each release of the service. 
 version: 1.0.0.1
 # Release notes for the update - can be a string, paragraph or URL
