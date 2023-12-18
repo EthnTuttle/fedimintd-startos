@@ -1,7 +1,7 @@
 # Example written in yaml (toml and json are also acceptable)
 
 # The package identifier used by the OS. This must be unique amongst all other known packages
-id: fedimintd 
+id: fedimintd-startos 
  # A human readable service title
 title: "Fedimint"
 # Service version - accepts up to four digits, where the last confirms to revisions necessary for StartOS - see documentation: https://github.com/Start9Labs/emver-rs. This value will change with each release of the service. 
@@ -129,7 +129,7 @@ backup:
     system: true 
     # The executable to run the command to begin the backup create process
     entrypoint: compat 
-    # Arguments to pass into the entrypoint executable. In this example, the full command run will be: `compat duplicity hello-world /mnt/backup /root/data`
+    # Arguments to pass into the entrypoint executable. In this example, the full command run will be: `compat duplicity fedimintd /mnt/backup /root/data`
     args:
       - duplicity
       - create

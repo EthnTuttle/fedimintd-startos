@@ -1,0 +1,1 @@
+docker buildx build --tag start9/fedimintd/main:0.2.0.0 --platform=linux/arm64 -o type=docker,dest=image.tar .
