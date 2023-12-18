@@ -1,7 +1,7 @@
 # Example written in yaml (toml and json are also acceptable)
 
 # The package identifier used by the OS. This must be unique amongst all other known packages
-id: fedimintd-startos
+id: fedimintd
  # A human readable service title
 title: "Fedimint"
 # Service version - accepts up to four digits, where the last confirms to revisions necessary for StartOS - see documentation: https://github.com/Start9Labs/emver-rs. This value will change with each release of the service. 
@@ -63,7 +63,7 @@ main:
   # Specifies where to mount the data volume(s), if there are any. Mounts for pointer dependency volumes are also denoted here. These are necessary if data needs to be read from / written to these volumes. 
   mounts:
     # Specifies where on the service's file system its persistence directory should be mounted prior to service startup
-    fedimintd_data: /data
+    main: /data
 # This is where health checks would be defined - see a more advanced example in https://github.com/Start9Labs/start-pages-wrapper
 health-checks: {}
 config: ~
