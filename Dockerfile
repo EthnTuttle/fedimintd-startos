@@ -1,5 +1,4 @@
-FROM fedimint/feidmintd:v0.2.0
-
+FROM fedimint/fedimintd:v0.2.0
 ENV FM_BIND_P2P="0.0.0.0:8173"
 ENV FM_BIND_AP="0.0.0.0:8174"
 
