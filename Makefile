@@ -1,7 +1,6 @@
 PKG_ID := $(shell yq e ".id" manifest.yaml)
 PKG_VERSION := $(shell yq e ".version" manifest.yaml)
 TS_FILES := $(shell find ./ -name \*.ts)
-HELLO_WORLD_SRC := $(shell find ./fedimintd/src) fedimintd/Cargo.toml fedimintd/Cargo.lock
 
 # delete the target of a rule if it has changed and its recipe exits with a nonzero exit status
 .DELETE_ON_ERROR:
@@ -75,8 +74,8 @@ else
 endif
 	@start-sdk pack
 
-fedimintd/target/aarch64-unknown-linux-musl/release/fedimintd: $(HELLO_WORLD_SRC)
-	docker run --rm -it -v ~/.cargo/registry:/root/.cargo/registry -v "$(shell pwd)"/fedimintd:/home/rust/src messense/rust-musl-cross:aarch64-musl cargo build --release
+fedimintd/target/aarch64-unknown-linux-musl/release/fedimintd:
+	docker buildx build --tag start9/fedimintd-startos/main:0.2.0.0 --platform=linux/arm64 -o type=docker,dest=image.tar .
 
-fedimintd/target/x86_64-unknown-linux-musl/release/fedimintd: $(HELLO_WORLD_SRC)
-	docker run --rm -it -v ~/.cargo/registry:/root/.cargo/registry -v "$(shell pwd)"/fedimintd:/home/rust/src messense/rust-musl-cross:x86_64-musl cargo build --release
+fedimintd/target/x86_64-unknown-linux-musl/release/fedimintd:
+	docker buildx build --tag start9/fedimintd-startos/main:0.2.0.0 --platform=linux/arm64 -o type=docker,dest=image.tar .

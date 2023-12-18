@@ -3,3 +3,5 @@ scripts/*.js
 .DS_Store
 .vscode/
 docker-images
+image.tar
+.gitignore
