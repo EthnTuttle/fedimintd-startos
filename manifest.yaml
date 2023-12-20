@@ -64,6 +64,7 @@ main:
   mounts:
     # Specifies where on the service's file system its persistence directory should be mounted prior to service startup
     main: /data
+    fedimint: /fedimint-data
 # This is where health checks would be defined - see a more advanced example in https://github.com/Start9Labs/start-pages-wrapper
 health-checks: {}
 config: ~
@@ -73,6 +74,8 @@ properties: ~
 volumes:
   # This is the image where files from the project asset directory will go
   main:
+    type: data
+  fedimint: 
     type: data
 # This specifies how to configure the port mapping for exposing the service over TOR and LAN (if applicable). Many interfaces can be specified depending on the needs of the service. If it can be launched over a Local Area Network connection, specify a `lan-config`. Otherwise, at minimum, a `tor-config` must be specified.
 interfaces:
@@ -117,7 +120,18 @@ interfaces:
     protocols:
       - tcp
       - http
-dependencies: {}
+dependencies:
+# Key must be the package id of another service that exists in the marketplace
+  bitcoind:
+    version: ">=0.23.0.1 <=26.0.0"
+    requirement:
+      type: required
+    description: Used to subscribe to new block events from a full archival node.
+    config:
+      check:
+        type: script
+      auto-configure:
+        type: script
 # Specifies how backups should be run for this service. The default StartOS provided option is to use the duplicity backup library on a system image (compat)
 backup:
   create:
