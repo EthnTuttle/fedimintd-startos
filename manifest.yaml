@@ -1,22 +1,23 @@
 # Example written in yaml (toml and json are also acceptable)
 
 # The package identifier used by the OS. This must be unique amongst all other known packages
-id: fedimintd
- # A human readable service title
+id:
+  fedimintd
+  # A human readable service title
 title: "Fedimint"
-# Service version - accepts up to four digits, where the last confirms to revisions necessary for StartOS - see documentation: https://github.com/Start9Labs/emver-rs. This value will change with each release of the service. 
+# Service version - accepts up to four digits, where the last confirms to revisions necessary for StartOS - see documentation: https://github.com/Start9Labs/emver-rs. This value will change with each release of the service.
 version: 0.2.0.0
 # Release notes for the update - can be a string, paragraph or URL
 release-notes: "https://github.com/fedimint/fedimint/releases/tag/v0.2.0"
 # The type of license for the project. Include the LICENSE in the root of the project directory. A license is required for a Start9 package.
 license: mit
-# The Start9 wrapper repository URL for the package. This repo contains the manifest file (this), any scripts necessary for configuration, backups, actions, or health checks (more below). This key must exist. But could be embedded into the source repository. 
+# The Start9 wrapper repository URL for the package. This repo contains the manifest file (this), any scripts necessary for configuration, backups, actions, or health checks (more below). This key must exist. But could be embedded into the source repository.
 wrapper-repo: "https://github.com/EthnTuttle/fedimintd-startos"
 # The original project repository URL. There is no upstream repo in this example
 upstream-repo: "hhttps://github.com/fedimint/fedimint"
 # URL to the support site / channel for the project. This key can be omitted if none exists, or it can link to the original project repository issues.
 support-site: "https://fedimint.org/"
-# URL to the marketing site for the project. This key can be omitted if none exists, or it can link to the original project repository. 
+# URL to the marketing site for the project. This key can be omitted if none exists, or it can link to the original project repository.
 marketing-site: "https://fedimint.org/"
 # The series of commands to build the project into an s9pk for arm64/v8. In this case we are using a Makefile with the simple build command "make".
 build: ["make"]
@@ -27,7 +28,7 @@ description:
   # This description will display with additional details in the service's individual marketplace page
   long: |
     A modular open source protocol to custody and transact bitcoin in a community context, built on a strong foundation of privacy.
-# These assets are static files necessary for packaging the service for Start9 (into an s9pk). Each value is a path to the specified asset. If an asset is missing from this list, or otherwise denoted, it will be defaulted to the values denoted below. 
+# These assets are static files necessary for packaging the service for Start9 (into an s9pk). Each value is a path to the specified asset. If an asset is missing from this list, or otherwise denoted, it will be defaulted to the values denoted below.
 assets:
   # Default = LICENSE.md
   license: LICENSE
@@ -39,14 +40,14 @@ assets:
   # docker-images: image.tar
 # ----- This section commented out until we support long-running containers -----
 # The main action for initializing the service. This can be script to utilize the eOS scripting apis, or docker.
-# main: 
+# main:
 #   type: script
 # # Defines the containers needed to run the main and mounted volumes
 # containers:
 #   main:
 #     # Identifier for the main image volume, which will be used when other actions need to mount to this volume.
 #     image: main
-#     # Specifies where to mount the data volume(s), if there are any. Mounts for pointer dependency volumes are also denoted here. These are necessary if data needs to be read from / written to these volumes. 
+#     # Specifies where to mount the data volume(s), if there are any. Mounts for pointer dependency volumes are also denoted here. These are necessary if data needs to be read from / written to these volumes.
 #     mounts:
 #       # Specifies where on the service's file system its persistence directory should be mounted prior to service startup
 #       main: /root
@@ -58,24 +59,28 @@ main:
   image: main
   # The executable binary for starting the initialization action. For docker actions, this is typically a "docker_entrypoint.sh" file. See the Dockerfile and the docker_entrypoint.sh in this project for additional details.
   entrypoint: "docker_entrypoint.sh"
-  # Any arguments that should be passed into the entrypoint executable 
+  # Any arguments that should be passed into the entrypoint executable
   args: []
-  # Specifies where to mount the data volume(s), if there are any. Mounts for pointer dependency volumes are also denoted here. These are necessary if data needs to be read from / written to these volumes. 
+  # Specifies where to mount the data volume(s), if there are any. Mounts for pointer dependency volumes are also denoted here. These are necessary if data needs to be read from / written to these volumes.
   mounts:
     # Specifies where on the service's file system its persistence directory should be mounted prior to service startup
     main: /data
     fedimint: /fedimint-data
 # This is where health checks would be defined - see a more advanced example in https://github.com/Start9Labs/start-pages-wrapper
 health-checks: {}
-config: ~
+config:
+  get:
+    type: script
+  set:
+    type: script
 properties: ~
-#  type: script
+  # type: script
 # This denotes any data, asset, or pointer volumes that should be connected when the "docker run" command is invoked
 volumes:
   # This is the image where files from the project asset directory will go
   main:
     type: data
-  fedimint: 
+  fedimint:
     type: data
 # This specifies how to configure the port mapping for exposing the service over TOR and LAN (if applicable). Many interfaces can be specified depending on the needs of the service. If it can be launched over a Local Area Network connection, specify a `lan-config`. Otherwise, at minimum, a `tor-config` must be specified.
 interfaces:
@@ -86,7 +91,7 @@ interfaces:
     # A descriptive description of what the interface does
     description: The interface your Peer Guardians will connect to.
     tor-config:
-    # Port mappings are from the external port to the internal container port
+      # Port mappings are from the external port to the internal container port
       port-mapping:
         80: "8173"
     # Port mappings are from the external port to the internal container port
@@ -106,7 +111,7 @@ interfaces:
     # A descriptive description of what the interface does
     description: The interface clients and setup UI will connect to.
     tor-config:
-    # Port mappings are from the external port to the internal container port
+      # Port mappings are from the external port to the internal container port
       port-mapping:
         80: "8174"
     # Port mappings are from the external port to the internal container port
@@ -121,14 +126,14 @@ interfaces:
       - tcp
       - http
 dependencies:
-# Key must be the package id of another service that exists in the marketplace
   bitcoind:
-    version: ">=0.23.0.1 <=26.0.0"
+    version: ">=0.21.1.2 <27.0.0"
     requirement:
-      type: required
-    description: Used to subscribe to new block events from a full archival node.
+      type: "opt-out"
+      how: Internal bitcoind is used by default. 
+    description: Used as a blockchain backend.
     config:
-      check:
+      check: 
         type: script
       auto-configure:
         type: script
@@ -139,10 +144,10 @@ backup:
     type: docker
     # The docker image to use. In this case, a pre-loaded system image called compat
     image: compat
-    # Required if the action uses a system image. The default value is false. 
-    system: true 
+    # Required if the action uses a system image. The default value is false.
+    system: true
     # The executable to run the command to begin the backup create process
-    entrypoint: compat 
+    entrypoint: compat
     # Arguments to pass into the entrypoint executable. In this example, the full command run will be: `compat duplicity fedimintd /mnt/backup /root/data`
     args:
       - duplicity
@@ -151,9 +156,9 @@ backup:
       # For duplicity, the backup mount point needs to be something other than `/root`, so we default to `/root/data`
       - /root/data
     mounts:
-      # BACKUP is the default volume that is used for backups. This is whatever backup drive is mounted to the device, or a network filesystem.  
+      # BACKUP is the default volume that is used for backups. This is whatever backup drive is mounted to the device, or a network filesystem.
       # The value here donates where the mount point will be. The backup drive is mounted to this location.
-      BACKUP: "/mnt/backup" 
+      BACKUP: "/mnt/backup"
       main: "/root/data"
   # The action to execute the backup restore functionality. Details for the keys below are the same as above.
   restore:
