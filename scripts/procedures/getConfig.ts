@@ -61,4 +61,29 @@ export const getConfig: T.ExpectedExports.getConfig = compat.getConfig({
     multi: false,
     selector: "$.rpc.password",
   },
+  api: {
+    type: "object",
+    name: "API Settings",
+    description: "Websocket endpoints for fedimintd",
+    spec: {
+      p2p: {
+        name: "Peer-2-Peer Endpoint",
+        description: "The endpoint for other Guardian server to connect to.",
+        type: "pointer",
+        subtype: "package",
+        "package-id": "fedimintd",
+        target: "tor-address",
+        interface: "main"
+      },
+      config: {
+        name: "Config API Endpoint",
+        description: "The endpoint for clients and Guardians to utilize.",
+        type: "pointer",
+        subtype: "package",
+        "package-id": "fedimintd",
+        target: "tor-address",
+        interface: "api"
+      }
+    }
+  }
 });
