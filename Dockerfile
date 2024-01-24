@@ -11,7 +11,7 @@ RUN apt-get update && apt-get -y upgrade && apt-get install -y -qq --no-install-
 RUN wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_${PLATFORM} -O /usr/bin/yq && chmod +x /usr/bin/yq
 
 # Stage 2: Create the final image
-FROM fedimint/fedimintd:v0.2
+FROM fedimint/fedimintd:v0.2.1
 
 # Copy yq binary from the builder stage
 COPY --from=builder /usr/bin/yq /bin/yq
